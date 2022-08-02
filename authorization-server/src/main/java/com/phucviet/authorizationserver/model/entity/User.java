@@ -1,5 +1,6 @@
 package com.phucviet.authorizationserver.model.entity;
 
+import com.phucviet.authorizationserver.model.enums.ESocialProvider;
 import lombok.*;
 
 import javax.persistence.*;
@@ -27,6 +28,16 @@ public class User implements Serializable {
 
   @Column(name = "email")
   private String email;
+
+  @Column(name = "image_url")
+  private String imageUrl;
+
+  @Enumerated(EnumType.STRING)
+  @Column(name = "provider")
+  private ESocialProvider provider;
+
+  @Column(name = "provider_id")
+  private String providerId;
 
   @Column(name = "enabled", columnDefinition = "boolean default true")
   private boolean enabled;

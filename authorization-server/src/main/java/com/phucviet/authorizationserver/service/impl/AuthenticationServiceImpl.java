@@ -3,6 +3,7 @@ package com.phucviet.authorizationserver.service.impl;
 import com.phucviet.authorizationserver.model.entity.Role;
 import com.phucviet.authorizationserver.model.entity.User;
 import com.phucviet.authorizationserver.model.enums.ERole;
+import com.phucviet.authorizationserver.model.enums.ESocialProvider;
 import com.phucviet.authorizationserver.model.request.SignUpRequest;
 import com.phucviet.authorizationserver.model.response.MessageResponse;
 import com.phucviet.authorizationserver.reponsitory.PermissionRepository;
@@ -46,6 +47,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
             .username(signUpRequest.getUsername())
             .email(signUpRequest.getEmail())
             .password(encoder.encode(signUpRequest.getPassword()))
+            .provider(ESocialProvider.local)
             .enabled(true)
             .accountNonExpired(true)
             .credentialsNonExpired(true)
@@ -89,5 +91,12 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     user.setRoles(roles);
     userRepository.save(user);
     return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
+  }
+
+  @Override
+  public User getCurrentUser(Integer id) {
+    return userRepository
+        .findById(id)
+        .orElseThrow(() -> new RuntimeException("User not exist: " + id));
   }
 }

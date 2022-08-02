@@ -33,4 +33,15 @@ public class UserServiceImpl implements UserService {
   public User findByUsername(String username) {
     return userRepository.findByUsername(username).get();
   }
+
+  @Override
+  public UserDetails loadUserById(Integer id) {
+    Optional<User> optionalUser = userRepository.findById(id);
+
+    optionalUser.orElseThrow(() -> new UsernameNotFoundException("Username or password wrong"));
+
+    UserDetails userDetails = new UserDetailsImpl(optionalUser.get());
+    new AccountStatusUserDetailsChecker().check(userDetails);
+    return userDetails;
+  }
 }
