@@ -30,6 +30,13 @@ security:
           8+GL4/ttx2KZpubjXswMAoMFXGhfiqFAWkMy8rxpvFEfsjChOu38gVEjhl0r7orj
           EQIDAQAB
           -----END PUBLIC KEY-----
+#security:
+#  oauth2:
+#    resource:
+#      token-info-uri: http://localhost:9191/oauth/check_token
+#    client:
+#      client-id: mobile
+#      client-secret: pin
 server:
   port: 8191
 
