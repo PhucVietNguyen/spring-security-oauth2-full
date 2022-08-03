@@ -14,23 +14,14 @@ public class AppProperties {
   private final OAuth2 oauth2 = new OAuth2();
 
   public static class Auth {
-    private String tokenSecret;
-    private long tokenExpirationMsec;
+    private long tokenExpiration;
 
-    public String getTokenSecret() {
-      return tokenSecret;
+    public long getTokenExpiration() {
+      return tokenExpiration;
     }
 
-    public void setTokenSecret(String tokenSecret) {
-      this.tokenSecret = tokenSecret;
-    }
-
-    public long getTokenExpirationMsec() {
-      return tokenExpirationMsec;
-    }
-
-    public void setTokenExpirationMsec(long tokenExpirationMsec) {
-      this.tokenExpirationMsec = tokenExpirationMsec;
+    public void setTokenExpiration(long tokenExpiration) {
+      this.tokenExpiration = tokenExpiration;
     }
   }
 

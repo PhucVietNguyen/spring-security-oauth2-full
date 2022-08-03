@@ -20,6 +20,8 @@ public class JwtUtils {
 
   @Autowired private AppProperties appProperties;
 
+  @Autowired private KeyUtils keyUtils;
+
   private static final String AUTHORITIES_KEY = "authorities";
 
   public String generateJwtTokenSocial(Authentication authentication) {
@@ -33,14 +35,14 @@ public class JwtUtils {
                 .collect(Collectors.toList()))
         .setIssuedAt(new Date())
         .setExpiration(
-            new Date(new Date().getTime() + appProperties.getAuth().getTokenExpirationMsec()))
-        .signWith(SignatureAlgorithm.HS512, appProperties.getAuth().getTokenSecret())
+            new Date(new Date().getTime() + appProperties.getAuth().getTokenExpiration()))
+        .signWith(SignatureAlgorithm.RS256, keyUtils.getKeyPair().getPrivate())
         .compact();
   }
 
   public String getUserIdFromJwtTokenSocial(String token) {
     return Jwts.parser()
-        .setSigningKey(appProperties.getAuth().getTokenSecret())
+        .setSigningKey(keyUtils.getKeyPair().getPublic())
         .parseClaimsJws(token)
         .getBody()
         .getSubject();
@@ -57,9 +59,7 @@ public class JwtUtils {
 
   public boolean validateJwtTokenSocial(String authToken) {
     try {
-      Jwts.parser()
-          .setSigningKey(appProperties.getAuth().getTokenSecret())
-          .parseClaimsJws(authToken);
+      Jwts.parser().setSigningKey(keyUtils.getKeyPair().getPublic()).parseClaimsJws(authToken);
       return true;
     } catch (SignatureException e) {
       log.error("Invalid JWT signature: {}", e.getMessage());

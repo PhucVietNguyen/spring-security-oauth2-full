@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class TestController {
 
   @GetMapping("/message/{text}")
-  @PreAuthorize("hasRole('ROLE_ADMIN')")
+  @PreAuthorize("hasRole('ROLE_USER')")
   public ResponseEntity<?> showMessage(@PathVariable String text) {
     return ResponseEntity.status(HttpStatus.OK).body(text);
   }

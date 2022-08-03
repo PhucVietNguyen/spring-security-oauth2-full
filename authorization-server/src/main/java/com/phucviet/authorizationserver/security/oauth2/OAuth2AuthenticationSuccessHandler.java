@@ -30,17 +30,6 @@ public class OAuth2AuthenticationSuccessHandler extends SimpleUrlAuthenticationS
   private HttpCookieOAuth2AuthorizationRequestRepository
       httpCookieOAuth2AuthorizationRequestRepository;
 
-  //    @Autowired
-  //    public OAuth2AuthenticationSuccessHandler(TokenProvider tokenProvider, AppProperties
-  // appProperties,
-  //                                       HttpCookieOAuth2AuthorizationRequestRepository
-  // httpCookieOAuth2AuthorizationRequestRepository) {
-  //        this.tokenProvider = tokenProvider;
-  //        this.appProperties = appProperties;
-  //        this.httpCookieOAuth2AuthorizationRequestRepository =
-  // httpCookieOAuth2AuthorizationRequestRepository;
-  //    }
-
   @Override
   public void onAuthenticationSuccess(
       HttpServletRequest request, HttpServletResponse response, Authentication authentication)

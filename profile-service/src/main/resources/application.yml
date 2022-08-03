@@ -19,10 +19,17 @@ spring:
 security:
   oauth2:
     resource:
-      token-info-uri: http://localhost:9191/oauth/check_token
-    client:
-      client-id: profile
-      client-secret: password
+      jwt:
+        key-value: |
+          -----BEGIN PUBLIC KEY-----
+          MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAlFtvrJw+2RIZ6gbf5WUk
+          YnnTom5tHVrhEmrglVv8NJ0sgRrjhVpXu2BYj19XhiQJFT63h0CfQi16pL6dVVRl
+          Rp2UIUx2Cc1h7YTQ57uWNNBcsfUAA7ba1Z1u8jrPaWH+FdwrN+EZJ1J6X79OmuAA
+          0cSmg1e3sfp9O97V/odYPvo+vvvD7oDWEegDbF8381C+JWtQumzNJoAq2BYeyoOM
+          i91KwOdz9ygG4tY4M+2ZQQci4LhEgk/OoEyMENlYskwjr3DXs/oN6r7KTD6Y9Ca3
+          8+GL4/ttx2KZpubjXswMAoMFXGhfiqFAWkMy8rxpvFEfsjChOu38gVEjhl0r7orj
+          EQIDAQAB
+          -----END PUBLIC KEY-----
 server:
   port: 8191
 
