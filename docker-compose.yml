@@ -1,0 +1,37 @@
+version: "3"
+services:
+  auth-service:
+    container_name:  auth-service
+    image:  auth.service:latest
+    build:
+      context: ./authorization-server
+      dockerfile: Dockerfile
+    expose:
+      - 9191
+    networks:
+      - my-network
+    ports:
+      - "9191:9191"
+    logging:
+      driver: json-file
+    restart: always
+  profile-service:
+    container_name: profile-service
+    image: profile.service:latest
+    build:
+      context: ./profile-service
+      dockerfile: Dockerfile
+    expose:
+      - 8191
+    networks:
+      - my-network
+    ports:
+      - "8191:8191"
+    logging:
+      driver: json-file
+    restart: always
+    depends_on:
+      - auth-service
+networks:
+  my-network:
+    external: true
